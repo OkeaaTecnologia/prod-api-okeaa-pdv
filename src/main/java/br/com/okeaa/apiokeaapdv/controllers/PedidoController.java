@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/v1")        //Padrão para os métodos /api/...
-@Api(value = "API REST PEDIDOS")    //Swagger
+@Api(value = "API REST PEDIDO")    //Swagger
 @CrossOrigin(origins = "*")        // Liberar os dominios da API
 @Validated
 public class PedidoController {

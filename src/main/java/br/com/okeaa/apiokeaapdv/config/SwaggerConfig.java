@@ -28,8 +28,8 @@ public class SwaggerConfig {
 	private ApiInfo metaInfo() {
 
         ApiInfo apiInfo = new ApiInfo(
-                "API REST CONTATOS",
-                "API REST para consumo de contatos Bling.",
+                "API REST PDV",
+                "API REST para consumo de contato, forma de pagamento, pedido e seleciona loja da plataforma Bling.",
                 "1.0",
                 "Terms of Service",
                 new Contact("Okeaa", "http://www.okeaatecnologia.com/", "rafael.machado@okeaatecnologia.com.br"),
