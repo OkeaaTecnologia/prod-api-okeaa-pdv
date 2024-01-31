@@ -29,8 +29,3 @@ public class TiposContatoResponse implements Serializable {
     @JoinColumn(name = "tipo_contato_id")
     public TipoContatoResponse tipoContato;
 }
-
-
-
-
-

@@ -1,12 +1,12 @@
 package br.com.okeaa.apiokeaapdv.controllers;
 
-
-import br.com.okeaa.apiokeaapdv.controllers.request.pedido.JsonRequestPedido;
 import br.com.okeaa.apiokeaapdv.controllers.response.pedido.JsonResponsePedido;
 import br.com.okeaa.apiokeaapdv.exceptions.pedido.ApiPedidoException;
 import br.com.okeaa.apiokeaapdv.service.pedido.PedidoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +22,8 @@ import javax.validation.Valid;
 @Validated
 public class PedidoController {
 
+    public static final Logger logger = LoggerFactory.getLogger(PedidoController.class);
+
     @Autowired
     public PedidoService pedidoService;
 
@@ -34,7 +36,7 @@ public class PedidoController {
         try {
             JsonResponsePedido request = pedidoService.getAllPedido();
 
-            System.out.println("GET: " + request);
+            logger.info("GET: " + request);
 
             return ResponseEntity.ok(request);
 
@@ -52,7 +54,7 @@ public class PedidoController {
         try {
             JsonResponsePedido request = pedidoService.getPedidoByIdPedido(numero);
 
-            System.out.println("GET ID: " + request);
+            logger.info("GET ID: " + request);
 
             return ResponseEntity.ok(request);
 
@@ -66,11 +68,11 @@ public class PedidoController {
      */
     @PostMapping(path = "/cadastrarpedido", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Cadastrar um pedido")
-    public ResponseEntity<JsonRequestPedido> createCategory(@RequestBody @Valid String xmlPedido) {
+    public ResponseEntity<String> createCategory(@RequestBody @Valid String xmlPedido) {
         try {
-            JsonRequestPedido request = pedidoService.createPedido(xmlPedido);
+            String request = pedidoService.createPedido(xmlPedido).getBody();
 
-            System.out.println("POST: " + request);
+            logger.info("POST: " + request);
 
             return ResponseEntity.ok(request);
 
@@ -84,9 +86,11 @@ public class PedidoController {
      */
     @PutMapping(path = "/atualizarpedido/{numero}", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Atualiza um pedido")
-    public ResponseEntity<JsonRequestPedido> updatePedido(@RequestBody String xmlPedido, @PathVariable("numero") String numero) {
+    public ResponseEntity<String> updatePedido(@RequestBody String xmlPedido, @PathVariable("numero") String numero) {
         try {
-            JsonRequestPedido request = pedidoService.updatePedido(xmlPedido, numero);
+            String request = pedidoService.updatePedido(xmlPedido, numero).getBody();
+
+            logger.info("UPDATE: " + request);
 
             return ResponseEntity.ok(request);
 

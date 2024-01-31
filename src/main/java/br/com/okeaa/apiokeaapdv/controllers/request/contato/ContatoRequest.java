@@ -40,25 +40,17 @@ public class ContatoRequest {
     @NotBlank
     @Size(max = 1, message = "Tipo do contato")
     @JsonProperty("tipoPessoa")
-    public String tipoPessoa;
+    public String tipoPessoa = "F";
 
     @NotNull
     @Digits(integer = 1, fraction = 0, message = "1 - Contribuinte do ICMS, 2 - Contribuinte isento do ICMS ou 9 - Não contribuinte")
     @JsonProperty("contribuinte")
-    public Integer contribuinte;
+    public Integer contribuinte = 9;
 
     @NotBlank(message = "CPF ou CNPJ do contato não pode estar em branco")
     @Size(max = 18, message = "CPF ou CNPJ do contato deve ter no máximo 18 caracteres")
     @JsonProperty("cpf_cnpj")
     public String cpf_cnpj;
-
-
-//    @CNPJ
-//    @CPF
-//    @NotBlank
-//    @Size(max = 18, message = "CPF ou CNPJ do contato")
-//    @JsonProperty("cnpj")
-//    public String cnpj;
 
     @Size(max = 18, message = "RG ou Inscrição Estadual do cliente")
     @JsonProperty("ie_rg")
@@ -115,7 +107,6 @@ public class ContatoRequest {
     @Digits(integer = 11, fraction = 2, message = "O limite de crédito deve ter no máximo 11 dígitos inteiros e 2 decimais")
     @DecimalMax(value = "9999999.99", message = "O limite de crédito deve ser no máximo 9999999.99")
     @DecimalMin(value = "0.00", message = "O limite de crédito deve ser no mínimo 0.00")
-//    @Column(precision = 11, scale = 2)
     @JsonProperty("limiteCredito")
     public BigDecimal limiteCredito;
 
@@ -134,11 +125,20 @@ public class ContatoRequest {
     @JsonProperty("obs")
     public String obs;
 
+    @JsonProperty("sexo")
+    public String sexo;
+
+    @JsonProperty("situacao")
+    public String situacao;
+
+    @JsonProperty("dataNascimento")
+    public String dataNascimento;
+
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contatoRequest")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contatoRequest", orphanRemoval = true)
     @JsonProperty("tiposContato")
     @JsonManagedReference // Anotação para indicar que esta é a ponta "gerenciada" da relação
-    public List<TiposContatoRequest> tiposContato = new ArrayList<>();
+    public List<TiposContatoRequest> tipos_contatos = new ArrayList<>();
 
     @JsonIgnore
     public String flag;

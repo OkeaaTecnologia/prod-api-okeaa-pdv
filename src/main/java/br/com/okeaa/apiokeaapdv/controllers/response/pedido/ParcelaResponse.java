@@ -1,18 +1,23 @@
 package br.com.okeaa.apiokeaapdv.controllers.response.pedido;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
 @NoArgsConstructor
-//@Entity
-//@Table(name = "TB_CATEGORIA_RESPONSE")
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
+@Table(name = "TB_PEDIDO_PARCELA_RESPONSE")
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParcelaResponse {
+
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     @JsonProperty("idLancamento")
     public String idLancamento;
@@ -29,6 +34,8 @@ public class ParcelaResponse {
     @JsonProperty("destino")
     public String destino;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "forma_pagamento_id")
     @JsonProperty("forma_pagamento")
-    public FormaPagamentoResponse forma_pagamento;
+    public FormaPagamentoResponsePedido forma_pagamento;
 }

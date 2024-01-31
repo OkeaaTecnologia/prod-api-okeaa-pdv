@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface TiposContatoRequestRepository extends JpaRepository<TiposContatoRequest, Long> {
 
     Optional<TiposContatoRequest> findById(Long id);
+
 }

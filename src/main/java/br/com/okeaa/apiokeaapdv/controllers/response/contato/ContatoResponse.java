@@ -21,95 +21,89 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ContatoResponse {
 
-	@Id
-	@JsonProperty("id")
-	public Long id;
+    @Id
+    @JsonProperty("id")
+    public Long id;
 
-	@JsonProperty("codigo")
-	public String codigo;
+    @JsonProperty("codigo")
+    public String codigo;
 
-	@JsonProperty("nome")
-	public String nome;
+    @JsonProperty("nome")
+    public String nome;
 
-	@JsonProperty("fantasia")
-	public String fantasia;
+    @JsonProperty("fantasia")
+    public String fantasia;
 
-	@JsonProperty("tipo")
-	public String tipo;
+    @JsonProperty("tipo")
+    public String tipo;
 
-	@JsonProperty("cnpj")
-	public String cnpj;
+    @JsonProperty("cnpj")
+    public String cnpj;
 
-//	@JsonProperty("cpf_cnpj")
-//	public String cpf_cnpj;
+    @JsonProperty("ie_rg")
+    public String ie_rg;
 
-	@JsonProperty("ie_rg")
-	public String ie_rg;
+    @JsonProperty("endereco")
+    public String endereco;
 
-	@JsonProperty("endereco")
-	public String endereco;
+    @JsonProperty("numero")
+    public String numero;
 
-	@JsonProperty("numero")
-	public String numero;
+    @JsonProperty("bairro")
+    public String bairro;
 
-	@JsonProperty("bairro")
-	public String bairro;
+    @JsonProperty("cep")
+    public String cep;
 
-	@JsonProperty("cep")
-	public String cep;
+    @JsonProperty("cidade")
+    public String cidade;
 
-	@JsonProperty("cidade")
-	public String cidade;
+    @JsonProperty("complemento")
+    public String complemento;
 
-	@JsonProperty("complemento")
-	public String complemento;
+    @JsonProperty("uf")
+    public String uf;
 
-	@JsonProperty("uf")
-	public String uf;
+    @JsonProperty("fone")
+    public String fone;
 
-	@JsonProperty("fone")
-	public String fone;
+    @JsonProperty("email")
+    public String email;
 
-	@JsonProperty("email")
-	public String email;
+    @JsonProperty("situacao")
+    public String situacao;
 
-	@JsonProperty("situacao")
-	public String situacao;
+    @JsonProperty("contribuinte")
+    public String contribuinte;
 
-	@JsonProperty("contribuinte")
-	public String contribuinte;
+    @JsonProperty("site")
+    public String site;
 
-	@JsonProperty("site")
-	public String site;
+    @JsonProperty("celular")
+    public String celular;
 
-	@JsonProperty("celular")
-	public String celular;
+    @JsonProperty("dataAlteracao")
+    public String dataAlteracao;
 
-	@JsonProperty("dataAlteracao")
-	public String dataAlteracao;
+    @JsonProperty("dataInclusao")
+    public String dataInclusao;
 
-	@JsonProperty("dataInclusao")
-	public String dataInclusao;
+    @JsonProperty("sexo")
+    public String sexo;
 
-	@JsonProperty("sexo")
-	public String sexo;
+    @JsonProperty("clienteDesde")
+    public String clienteDesde;
 
-	@JsonProperty("clienteDesde")
-	public String clienteDesde;
+    @JsonProperty("limiteCredito")
+    public String limiteCredito;
 
-	@JsonProperty("limiteCredito")
-	public String limiteCredito;
+    @JsonProperty("dataNascimento")
+    public String dataNascimento;
 
-	@JsonProperty("dataNascimento")
-	public String dataNascimento;
-
-	@JsonProperty("informacoesContato")
-	public String informacoesContato;
-
-	@ToString.Exclude
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contatoResponse")
-	@JsonProperty("tiposContato")
-	@JsonManagedReference // Anotação para indicar que esta é a ponta "gerenciada" da relação
-	public List<TiposContatoResponse> tiposContato = new ArrayList<>();
+    @ToString.Exclude
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contatoResponse")
+    @JsonProperty("tiposContato")
+    @JsonManagedReference // Anotação para indicar que esta é a ponta "gerenciada" da relação
+    public List<TiposContatoResponse> tiposContato = new ArrayList<>();
 
 }

@@ -1,18 +1,29 @@
 package br.com.okeaa.apiokeaapdv.controllers.response.pedido;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
 @NoArgsConstructor
-//@Entity
-//@Table(name = "TB_CATEGORIA_RESPONSE")
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
+@Table(name = "TB_PEDIDO_ITEM_RESPONSE")
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ItemResponse {
+
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long idbD;
+
+    @JsonProperty("id")
+    public Long id;
 
     @JsonProperty("codigo")
     public String codigo;

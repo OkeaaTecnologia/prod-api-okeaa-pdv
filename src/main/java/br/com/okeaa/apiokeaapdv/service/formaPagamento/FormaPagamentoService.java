@@ -14,7 +14,7 @@ public interface FormaPagamentoService {
 
     ResponseEntity<String> deleteFormaPagemento(@PathVariable("id") String id);
 
-    JsonRequestFormaPagamento createFormaPagamento(@RequestBody String xmlFormaPagamento);
+    ResponseEntity<String> createFormaPagamento(@RequestBody String xmlFormaPagamento);
 
-    JsonRequestFormaPagamento updateFormaPagamento(@RequestBody String xmlFormaPagamento, @PathVariable("id") String id);
+    ResponseEntity<String> updateFormaPagamento(@RequestBody String xmlFormaPagamento, @PathVariable("id") String id);
 }

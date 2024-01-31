@@ -20,11 +20,11 @@ public class TiposContatoRequest  implements Serializable {
     public Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contato_request_id", referencedColumnName = "id")
+    @JoinColumn(name = "parcelas_id", referencedColumnName = "id")
     @JsonBackReference // Anotação para indicar que esta é a ponta "de volta" da relação
     public ContatoRequest contatoRequest;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_contato_id")
-    public TipoContatoRequest tipoContato;
+    public TipoContatoRequest tipo_contato;
 }

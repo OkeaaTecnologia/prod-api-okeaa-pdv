@@ -3,6 +3,7 @@ package br.com.okeaa.apiokeaapdv.controllers;
 import br.com.okeaa.apiokeaapdv.controllers.response.selecionarLoja.SelecionaLoja;
 import br.com.okeaa.apiokeaapdv.service.selecionarLoja.SelecionaLojaService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,13 +51,27 @@ public class SelecionaLojaController {
     }
 
     @PostMapping(value = "/adicionarLoja", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<SelecionaLoja> saveLoja(@RequestBody SelecionaLoja selecionaLoja) {
+    public ResponseEntity<String> saveLoja(@RequestBody @Valid String selecionaLoja) {
         try {
-            SelecionaLoja savedLoja = selecionaLojaService.saveLoja(selecionaLoja);
+            String savedLoja = selecionaLojaService.saveLoja(selecionaLoja).getBody();
+
             return ResponseEntity.ok(savedLoja);
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
+
+    @PutMapping(path = "/atualizarLoja/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Atualizar uma loja existente")
+    public ResponseEntity<String> updateLoja(@RequestBody @Valid String selecionaLoja, @PathVariable String id) {
+        try {
+            String updatedLoja = selecionaLojaService.updateLoja(selecionaLoja, id).getBody();
+
+            return ResponseEntity.ok(updatedLoja);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

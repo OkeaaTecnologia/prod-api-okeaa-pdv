@@ -29,10 +29,10 @@ public class SwaggerConfig {
 
         ApiInfo apiInfo = new ApiInfo(
                 "API REST PDV",
-                "API REST para consumo de contato, forma de pagamento, pedido e seleciona loja da plataforma Bling.",
+                "API REST para consumo de contato, controle de caixa, forma de pagamento, pedido, seleciona loja da plataforma Bling.",
                 "1.0",
                 "Terms of Service",
-                new Contact("Okeaa", "http://www.okeaatecnologia.com/", "rafael.machado@okeaatecnologia.com.br"),
+                new Contact("Okeaa", "http://www.okeaatecnologia.com.br/", "rafael.machado@okeaatecnologia.com.br"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licesen.html", new ArrayList<VendorExtension>()
         );

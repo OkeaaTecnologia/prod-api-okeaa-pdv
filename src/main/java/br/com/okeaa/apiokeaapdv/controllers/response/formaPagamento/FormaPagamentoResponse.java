@@ -6,16 +6,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+
 @Data
 @NoArgsConstructor
-//@Entity
-//@Table(name = "TB_CATEGORIA_RESPONSE")
+@Entity
+@Table(name = "TB_FORMAPAGAMENTO_RESPONSE")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FormaPagamentoResponse {
 
+    @Id
     @JsonProperty("id")
-    public String id;
+    public Long id;
 
     @JsonProperty("descricao")
     public String descricao;

@@ -1,20 +1,26 @@
 package br.com.okeaa.apiokeaapdv.controllers.response.pedido;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-//@Entity
-//@Table(name = "TB_CATEGORIA_RESPONSE")
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@Entity
+@Table(name = "TB_PEDIDO_RESPONSE")
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PedidoResponse {
+
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
     @JsonProperty("desconto")
     public String desconto;
@@ -61,18 +67,49 @@ public class PedidoResponse {
     @JsonProperty("dataPrevista")
     public String dataPrevista;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cliente_idBd")
     @JsonProperty("cliente")
     public ClienteResponse cliente;
 
-    @JsonProperty("pagamento")
-    public PagamentoResponse pagamento;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "transporte_id")
     @JsonProperty("transporte")
     public TransporteResponse transporte;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pedidoitens")
+    @JsonManagedReference // Anotação para indicar que esta é a ponta "gerenciada" da relação
     @JsonProperty("itens")
-    public ArrayList<ItensResponse> itens;
+    public List<ItensResponse> itens = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "pedidoitens")
+    @JsonManagedReference // Anotação para indicar que esta é a ponta "gerenciada" da relação
     @JsonProperty("parcelas")
-    public ArrayList<ParcelasResponse> parcelas;
+    public List<ParcelasResponse> parcelas = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "PedidoResponse{" +
+                "id='" + id + '\'' +
+                ", desconto=" + desconto +
+                ", observacoes='" + observacoes + '\'' +
+                ", observacaointerna='" + observacaointerna + '\'' +
+                ", data='" + data + '\'' +
+                ", numero=" + numero +
+                ", numeroOrdemCompra=" + numeroOrdemCompra +
+                ", vendedor=" + vendedor +
+                ", valorfrete=" + valorfrete +
+                ", outrasdespesas=" + outrasdespesas +
+                ", totalprodutos='" + totalprodutos + '\'' +
+                ", totalvenda='" + totalvenda + '\'' +
+                ", situacao='" + situacao + '\'' +
+                ", dataSaida='" + dataSaida + '\'' +
+                ", loja=" + loja +
+                ", dataPrevista='" + dataPrevista + '\'' +
+                ", cliente='" + cliente + '\'' +
+                ", transporte='" + transporte + '\'' +
+                ", itens='" + itens + '\'' +
+                ", parcelas='" + parcelas + '\'' +
+                '}';
+    }
 }

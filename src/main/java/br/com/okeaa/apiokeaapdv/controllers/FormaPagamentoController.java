@@ -7,6 +7,8 @@ import br.com.okeaa.apiokeaapdv.exceptions.formaPagamento.ApiFormaPagamentoExcep
 import br.com.okeaa.apiokeaapdv.service.formaPagamento.FormaPagamentoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import javax.validation.Valid;
 @Validated
 public class FormaPagamentoController {
 
+    public static final Logger logger = LoggerFactory.getLogger(FormaPagamentoController.class);
+
     @Autowired
     public FormaPagamentoService formaPagamentoService;
 
@@ -34,7 +38,7 @@ public class FormaPagamentoController {
         try {
             JsonResponseFormaPagamento request = formaPagamentoService.getAllFormaPagamento();
 
-            System.out.println("GET: " + request);
+            logger.info("GET: " + request);
 
             return ResponseEntity.ok(request);
 
@@ -52,7 +56,7 @@ public class FormaPagamentoController {
         try {
             JsonResponseFormaPagamento request = formaPagamentoService.getFormaPagamentoById(id);
 
-            System.out.println("GET ID: " + request);
+            logger.info("GET ID: " + request);
 
             return ResponseEntity.ok(request);
 
@@ -70,7 +74,7 @@ public class FormaPagamentoController {
         try {
             ResponseEntity<String> request = formaPagamentoService.deleteFormaPagemento(id);
 
-            System.out.println("Codigo deletado = " + id);
+            logger.info("Codigo deletado = " + id);
 
             return request;
 
@@ -84,11 +88,11 @@ public class FormaPagamentoController {
      */
     @PostMapping(path = "/cadastrarformapagamento", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Cadastra uma forma de pagamento")
-    public ResponseEntity<JsonRequestFormaPagamento> createFormaPagamento(@RequestBody @Valid String xmlFormaPagamento) {
+    public ResponseEntity<String> createFormaPagamento(@RequestBody @Valid String xmlFormaPagamento) {
         try {
-            JsonRequestFormaPagamento request = formaPagamentoService.createFormaPagamento(xmlFormaPagamento);
+            String request = formaPagamentoService.createFormaPagamento(xmlFormaPagamento).getBody();
 
-            System.out.println("POST: " + request);
+            logger.info("POST: " + request);
 
             return ResponseEntity.ok(request);
 
@@ -102,9 +106,11 @@ public class FormaPagamentoController {
      */
     @PutMapping(path = "/atualizarformapagamento/{id}", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Atualiza um pedido")
-    public ResponseEntity<JsonRequestFormaPagamento> updateFormaPagamento(@RequestBody String xmlFormaPagamento, @PathVariable("id") String id) {
+    public ResponseEntity<String> updateFormaPagamento(@RequestBody String xmlFormaPagamento, @PathVariable("id") String id) {
         try {
-            JsonRequestFormaPagamento request = formaPagamentoService.updateFormaPagamento(xmlFormaPagamento, id);
+            String request = formaPagamentoService.updateFormaPagamento(xmlFormaPagamento, id).getBody();
+
+            logger.info("PUT: " + request);
 
             return ResponseEntity.ok(request);
 
